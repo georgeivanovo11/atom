@@ -12,7 +12,7 @@ import static org.hamcrest.core.IsEqual.equalTo;
 
 public class Tests {
     @Test
-    public void shouldCalculateCowsAndBulls1(){
+    public void shouldCalculateCowsAndBulls1() {
         HashMap<String,Integer> result = Engine.calculate("atom","java");
 
         assertThat(result.get("cows"), is(equalTo(1)));
@@ -20,7 +20,7 @@ public class Tests {
     }
 
     @Test
-    public void shouldCalculateCowsAndBulls2(){
+    public void shouldCalculateCowsAndBulls2() {
         HashMap<String,Integer> result = Engine.calculate("lava","java");
 
         assertThat(result.get("cows"), is(equalTo(0)));
@@ -28,7 +28,7 @@ public class Tests {
     }
 
     @Test
-    public void shouldCalculateCowsAndBulls3(){
+    public void shouldCalculateCowsAndBulls3() {
         HashMap<String,Integer> result = Engine.calculate("oooo","java");
 
         assertThat(result.get("cows"), is(equalTo(0)));
