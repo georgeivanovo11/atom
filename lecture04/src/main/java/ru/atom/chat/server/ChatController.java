@@ -66,7 +66,7 @@ public class ChatController {
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<String> logout(@RequestParam("name") String name) {
         if (!usersOnline.containsKey(name)) {
-            return ResponseEntity.badRequest().body("User '" + name  +"' was not logged in.");
+            return ResponseEntity.badRequest().body("User '" + name  + "' was not logged in.");
         }
         usersOnline.remove(name);
         messages.add("[" + name + "] logged out");
@@ -83,7 +83,7 @@ public class ChatController {
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<String> say(@RequestParam("name") String name, @RequestParam("msg") String msg) {
         if (!usersOnline.containsKey(name)) {
-            return ResponseEntity.badRequest().body("User '" + name  +"' was not logged in.");
+            return ResponseEntity.badRequest().body("User '" + name  + "' was not logged in.");
         }
         messages.add("[" + name + "]: " + msg);
         return ResponseEntity.ok().build();
@@ -105,12 +105,15 @@ public class ChatController {
 
     @RequestMapping(
             path = "recant",
-            method = RequestMethod.DELETE,
+            method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<String> recant(@RequestParam("name") String name, @RequestParam("msg") String msg) {
         if (!usersOnline.containsKey(name)) {
-            return ResponseEntity.badRequest().body("User '" + name  +"' was not logged in.");
+            return ResponseEntity.badRequest().body("User '" + name  + "' was not logged in.");
+        }
+        if (!messages.contains("[" + name + "]: " + msg)) {
+            return ResponseEntity.badRequest().body("This message does not exist");
         }
         messages.remove("[" + name + "]: " + msg);
         return ResponseEntity.noContent().build();

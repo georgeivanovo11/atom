@@ -78,8 +78,8 @@ public class ChatClient {
     public static Response recant(String name, String msg) throws IOException {
         MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
         Request request = new Request.Builder()
-                .delete(RequestBody.create(mediaType, "msg=" + msg))
-                .url(PROTOCOL + HOST + PORT + "/chat/clear?name=" + name)
+                .post(RequestBody.create(mediaType, "msg=" + msg))
+                .url(PROTOCOL + HOST + PORT + "/chat/recant?name=" + name)
                 .build();
         return client.newCall(request).execute();
     }
